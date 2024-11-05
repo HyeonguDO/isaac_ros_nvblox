@@ -33,13 +33,24 @@ constexpr float degreeToRadians(float degrees)
 }
 
 // ======= ROBOT FRAME PARAMS =======
+// 수정함
 constexpr StringParam::Description kGlobalFrameParamDesc{
   "global_frame", "odom",
   "The name of the TF frame in which the map is built. "
   "For the RealSense examples, this parameter is exposed as a launch argument."};
+  // constexpr StringParam::Description kGlobalFrameParamDesc{
+  // "global_frame", "map",
+  // "The name of the TF frame in which the map is built. "
+  // "For the RealSense examples, this parameter is exposed as a launch argument."};
 
+// 수정함
+// constexpr StringParam::Description kPoseFrameParamDesc{
+  // "pose_frame", "base_link",
+  // "Only used if use_topic_transforms is set to true. Pose and transform messages will be "
+  // "interpreted as being in this pose frame, and the remaining transform to the sensor "
+  // "frame will be looked up on the TF tree."};
 constexpr StringParam::Description kPoseFrameParamDesc{
-  "pose_frame", "base_link",
+  "pose_frame", "zed_camera_link",
   "Only used if use_topic_transforms is set to true. Pose and transform messages will be "
   "interpreted as being in this pose frame, and the remaining transform to the sensor "
   "frame will be looked up on the TF tree."};
@@ -79,13 +90,18 @@ constexpr StringParam::Description kMappingTypeParamDesc{"mapping_type", "static
 constexpr Param<EsdfMode>::Description kEsdfModeParamDesc{"esdf_mode", static_cast<EsdfMode>(1),
   "Whether to compute the ESDF in 3D (0) or 2D (1)."};
 
+// 수정함
 constexpr Param<float>::Description kMapClearingRadiusMParamDesc{
   "map_clearing_radius_m", 5.F,
+  // "map_clearing_radius_m", -1.0F,
   "Radius around the ``map_clearing_frame_id`` outside which we clear the map. "
   "Note that values <= 0.0 indicate that no clearing is performed."};
 
+// 수정함
 constexpr StringParam::Description kMapClearingFrameIdParamDesc{
-  "map_clearing_frame_id", "base_link", "The name of the TF frame around which we clear the map."};
+  // "map_clearing_frame_id", ",map", "The name of the TF frame around which we clear the map."};
+  // constexpr StringParam::Description kMapClearingFrameIdParamDesc{
+  "map_clearing_frame_id", "zed_camera_link", "The name of the TF frame around which we clear the map."};
 
 // ======= LIDAR PARAMS =======
 constexpr Param<int>::Description kLidarWidthParamDesc{"lidar_width", 1800,
@@ -118,17 +134,29 @@ constexpr Param<float>::Description kMaxAngleAboveZeroElevationRadParamDesc{
   "Default is for the *Hesai PandarXT32*."};
 
 // ======= VISUALIZATION PARAMS =======
-constexpr StringParam::Description kSliceVisualizationAttachmentFrameIdParamDesc{
-  "slice_visualization_attachment_frame_id", "base_link",
+// 수정함
+// constexpr StringParam::Description kSliceVisualizationAttachmentFrameIdParamDesc{
+//   "slice_visualization_attachment_frame_id", "base_link",
+//   "Frame to which the map slice bounds visualization is centered on the ``xy``-plane."};
+  constexpr StringParam::Description kSliceVisualizationAttachmentFrameIdParamDesc{
+  "slice_visualization_attachment_frame_id", "zed_camera_link",
   "Frame to which the map slice bounds visualization is centered on the ``xy``-plane."};
 
+// 수정함
 constexpr Param<float>::Description kSliceVisualizationSideLengthParamDesc{
   "slice_visualization_side_length", 10.F,
   "Side length of the map slice bounds visualization plane."};
+  // constexpr Param<float>::Description kSliceVisualizationSideLengthParamDesc{
+  // "slice_visualization_side_length", 1000.F,
+  // "Side length of the map slice bounds visualization plane."};
 
+// 수정함
 constexpr Param<float>::Description kLayerVisualizationMaxTsdfDistanceMParamDesc{
   "layer_visualization_max_tsdf_distance_m", .05F,
   "TSDF voxels with a distance above this value are not visualized."};
+  // constexpr Param<float>::Description kLayerVisualizationMaxTsdfDistanceMParamDesc{
+  // "layer_visualization_max_tsdf_distance_m", 100.0F,
+  // "TSDF voxels with a distance above this value are not visualized."};
 
 constexpr Param<float>::Description kLayerVisualizationMinTsdfWeightParamDesc{
   "layer_visualization_min_tsdf_weight", .1F,
@@ -190,7 +218,11 @@ constexpr Param<float>::Description kDecayDynamicOccupancyRateHzParamDesc{
   "decay_dynamic_occucancy_rate_hz", 10.F,
   "The desired rate for decaying the dynamic occupancy layer."};
 
-constexpr Param<float>::Description kClearMapOutsideRadiusRateHzParamDesc{
+// 수정함
+// constexpr Param<float>::Description kClearMapOutsideRadiusRateHzParamDesc{
+//   "clear_map_outside_radius_rate_hz", 1.F,
+//   "The desired rate for clearing the map from blocks far away from the robot."};
+  constexpr Param<float>::Description kClearMapOutsideRadiusRateHzParamDesc{
   "clear_map_outside_radius_rate_hz", 1.F,
   "The desired rate for clearing the map from blocks far away from the robot."};
 

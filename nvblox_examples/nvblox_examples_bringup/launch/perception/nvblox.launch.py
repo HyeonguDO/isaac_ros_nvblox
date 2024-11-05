@@ -57,6 +57,15 @@ def get_realsense_remappings(mode: NvbloxMode) -> List[Tuple[str, str]]:
         remappings.append(('camera_0/color/camera_info', '/camera/color/camera_info'))
     return remappings
 
+def get_zed_remappings(mode: NvbloxMode) -> List[Tuple[str, str]]:
+    remappings = []
+    remappings.append(('camera_0/depth/image', '/zed/zed_node/depth/depth_registered'))
+    remappings.append(('camera_0/depth/camera_info', '/zed/zed_node/depth/camera_info'))
+    remappings.append(('camera_0/color/image', '/zed/zed_node/rgb/image_rect_color'))
+    remappings.append(('camera_0/color/camera_info', '/zed/zed_node/rgb/camera_info'))
+    return remappings
+
+
 
 def add_nvblox(args: lu.ArgumentContainer) -> List[Action]:
     mode = NvbloxMode[args.mode]
@@ -73,7 +82,11 @@ def add_nvblox(args: lu.ArgumentContainer) -> List[Action]:
                                    'config/nvblox/specializations/nvblox_sim.yaml')
     realsense_config = lu.get_path('nvblox_examples_bringup',
                                    'config/nvblox/specializations/nvblox_realsense.yaml')
-
+    # zed_config = lu.get_path('nvblox_examples_bringup',
+    #                                'config/nvblox/specializations/nvblox_zed_v2.yaml')
+    zed_config = lu.get_path('nvblox_examples_bringup',
+                                   'config/nvblox/specializations/nvblox_zed.yaml')
+    #nvblox_zed.yaml
     if mode is NvbloxMode.static:
         mode_config = {}
     elif mode is NvbloxMode.people:
@@ -94,7 +107,11 @@ def add_nvblox(args: lu.ArgumentContainer) -> List[Action]:
         assert num_cameras == 1, 'Realsense example can only run with 1 camera.'
         assert not use_lidar, 'Can not run lidar for realsense example.'
     elif camera is NvbloxCamera.zed:
-        raise Exception(f'Zed camera currently not supported for Isaac 3.0.')
+        remappings = get_zed_remappings(mode)
+        camera_config = zed_config  # ZED 카메라에 맞는 설정 파일로 대체
+
+    
+    
     else:
         raise Exception(f'Camera {camera} not implemented for nvblox.')
 

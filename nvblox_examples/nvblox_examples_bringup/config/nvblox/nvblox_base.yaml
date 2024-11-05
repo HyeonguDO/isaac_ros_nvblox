@@ -35,7 +35,7 @@
     # depth settings
     use_depth: true
     # lidar settings
-    use_lidar: true
+    use_lidar: false
     lidar_width: 1800
     lidar_height: 31
     use_non_equal_vertical_fov_lidar_params: false
@@ -43,11 +43,11 @@
     maximum_sensor_message_queue_length: 10
     # Map clearing settings
     map_clearing_radius_m: 7.0 # no map clearing if < 0.0
-    map_clearing_frame_id: "base_link"
+    map_clearing_frame_id: "zed_camera_link"
     # QoS settings
     input_qos: "SYSTEM_DEFAULT"
     # Rviz visualization
-    slice_visualization_attachment_frame_id: "base_link"
+    slice_visualization_attachment_frame_id: "zed_camera_link"
     slice_visualization_side_length: 10.0
 
     layer_visualization_min_tsdf_weight: 0.1
@@ -81,7 +81,7 @@
       mesh_integrator_min_weight: 0.1
       mesh_integrator_weld_vertices: true
       # tsdf decay integrator
-      tsdf_decay_factor: 0.95
+      tsdf_decay_factor: 0.4
       exclude_last_view_from_decay: true
       # mesh streamer
       mesh_streamer_exclusion_height_m: 2.0
