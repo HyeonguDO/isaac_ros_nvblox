@@ -54,13 +54,13 @@ def generate_launch_description() -> LaunchDescription:
     
     args.add_arg(
         'nav2_params_file',
-        '/home/aimy/roboworld_ws/src/aimy_main/2_navigation/isaac_ros_nvblox/nvblox_examples/nvblox_examples_bringup/config/nav2/nav2_params.yaml',
+        '/home/hyeongu/navigation_ws/src/aimy_main/2_navigation/aimy_navigation_bringup/config/nav2/nav2_params.yaml',
         description='Full path to the ROS2 parameters file to use for Nav2.',
         cli=True)
     
     args.add_arg(
         'map',
-        '/home/aimy/roboworld_ws/src/aimy_main/2_navigation/isaac_ros_nvblox/map/real_robo_map_v2.yaml',
+        '/home/hyeongu/navigation_ws/src/aimy_main/2_navigation/aimy_navigation_bringup/map/changbo_map.yaml',
         description='Map file not required, starting with an empty map.',
         cli=True)
     
@@ -79,46 +79,46 @@ def generate_launch_description() -> LaunchDescription:
 
 
     # ZED
-    actions.append(
-        lu.include(
-            'nvblox_examples_bringup',
-            'launch/sensors/zed.launch.py',
-            launch_arguments={'container_name': NVBLOX_CONTAINER_NAME},
-            condition=UnlessCondition(lu.is_valid(args.rosbag))))
-
-    
-    # Nav2 bringup
-    if args.map:
-        actions.append(
-            lu.include(
-                'nav2_bringup',
-                'launch/bringup_launch.py',
-                launch_arguments={
-                    'params_file': args.nav2_params_file,
-                    'map': args.map,
-                    # 'filtered_map': args.filtered_map,
-                    'use_sim_time': 'false'
-                }))
-    else:
-        actions.append(
-            lu.include(
-                'nav2_bringup',
-                'launch/bringup_launch.py',
-                launch_arguments={
-                    'params_file': args.nav2_params_file,
-                    'use_sim_time': 'false'
-                }))
-    
-    # Nvblox
     # actions.append(
     #     lu.include(
     #         'nvblox_examples_bringup',
-    #         'launch/perception/nvblox.launch.py',
-    #         launch_arguments={
-    #             'container_name': NVBLOX_CONTAINER_NAME,
-    #             'mode': args.mode,
-    #             'camera': NvbloxCamera.zed,
-    #         }))
+    #         'launch/sensors/zed.launch.py',
+    #         launch_arguments={'container_name': NVBLOX_CONTAINER_NAME},
+    #         condition=UnlessCondition(lu.is_valid(args.rosbag))))
+
+    
+    # Nav2 bringup
+    # if args.map:
+    #     actions.append(
+    #         lu.include(
+    #             'nav2_bringup',
+    #             'launch/bringup_launch.py',
+    #             launch_arguments={
+    #                 'params_file': args.nav2_params_file,
+    #                 'map': args.map,
+    #                 # 'filtered_map': args.filtered_map,
+    #                 'use_sim_time': 'false'
+    #             }))
+    # else:
+    #     actions.append(
+    #         lu.include(
+    #             'nav2_bringup',
+    #             'launch/bringup_launch.py',
+    #             launch_arguments={
+    #                 'params_file': args.nav2_params_file,
+    #                 'use_sim_time': 'false'
+    #             }))
+    
+    # Nvblox
+    actions.append(
+        lu.include(
+            'nvblox_examples_bringup',
+            'launch/perception/nvblox.launch.py',
+            launch_arguments={
+                'container_name': NVBLOX_CONTAINER_NAME,
+                'mode': args.mode,
+                'camera': NvbloxCamera.zed,
+            }))
 
     # Visualization
     # actions.append(

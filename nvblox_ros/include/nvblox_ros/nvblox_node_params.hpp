@@ -99,9 +99,9 @@ constexpr Param<float>::Description kMapClearingRadiusMParamDesc{
 
 // 수정함
 constexpr StringParam::Description kMapClearingFrameIdParamDesc{
-  // "map_clearing_frame_id", ",map", "The name of the TF frame around which we clear the map."};
+  "map_clearing_frame_id", ",map", "The name of the TF frame around which we clear the map."};
   // constexpr StringParam::Description kMapClearingFrameIdParamDesc{
-  "map_clearing_frame_id", "zed_camera_link", "The name of the TF frame around which we clear the map."};
+  // "map_clearing_frame_id", "zed_camera_link", "The name of the TF frame around which we clear the map."};
 
 // ======= LIDAR PARAMS =======
 constexpr Param<int>::Description kLidarWidthParamDesc{"lidar_width", 1800,
