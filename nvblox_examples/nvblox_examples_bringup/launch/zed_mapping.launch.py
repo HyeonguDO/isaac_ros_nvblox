@@ -58,7 +58,7 @@ def generate_launch_description() -> LaunchDescription:
         actions.append(
             lu.include(
                 'nav2_bringup',
-                'launch/bringup_launch.py',
+                'launch/mapping_launch.py',
                 launch_arguments={
                     'params_file': args.nav2_params_file,
                     'map': args.map,
@@ -69,7 +69,7 @@ def generate_launch_description() -> LaunchDescription:
         actions.append(
             lu.include(
                 'nav2_bringup',
-                'launch/bringup_launch.py',
+                'launch/mapping_launch.py',
                 launch_arguments={
                     'params_file': args.nav2_params_file,
                     'use_sim_time': 'false'
@@ -86,7 +86,7 @@ def generate_launch_description() -> LaunchDescription:
                 'camera': NvbloxCamera.zed,
             }))
     
-     # map_saver_server 노드 추가
+    #  # map_saver_server 노드 추가
     # actions.append(
     #     LifecycleNode(
     #         package='nav2_map_server',
@@ -111,16 +111,6 @@ def generate_launch_description() -> LaunchDescription:
     #         output='screen'
     #     )
     # )
-
-    # Visualization
-    # actions.append(
-    #     lu.include(
-    #         'nvblox_examples_bringup',
-    #         'launch/visualization/visualization.launch.py',
-    #         launch_arguments={
-    #             'mode': args.mode,
-    #             'camera': NvbloxCamera.zed
-    #         }))
 
     # Container
     actions.append(lu.component_container(NVBLOX_CONTAINER_NAME, log_level=args.log_level))

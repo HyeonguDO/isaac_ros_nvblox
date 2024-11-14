@@ -17,7 +17,7 @@
     update_mesh_rate_hz: 5.0
     update_esdf_rate_hz: 10.0
     publish_layer_pointcloud_rate_hz: 5.0
-    decay_tsdf_rate_hz: 0.0     # 5.0         # 이거는 mesh 남아있게 하는거
+    decay_tsdf_rate_hz: 5.0     # 5.0         # 이거는 mesh 남아있게 하는거
     decay_dynamic_occupancy_rate_hz: 10.0
     clear_map_outside_radius_rate_hz: 1.0
 
@@ -42,17 +42,17 @@
     # Input queues
     maximum_sensor_message_queue_length: 10
     # Map clearing settings
-    map_clearing_radius_m: -1.0 # no map clearing if < 0.0 이거를 -1.0로 해야 맵 안 사라지고 남아있음
+    map_clearing_radius_m: 5.0 # no map clearing if < 0.0 이거를 -1.0로 해야 맵 안 사라지고 남아있음
     map_clearing_frame_id: "zed_camera_link"
     # QoS settings
     input_qos: "SYSTEM_DEFAULT"
     # Rviz visualization
-    slice_visualization_attachment_frame_id: "zed_camera_link"
+    slice_visualization_attachment_frame_id: "zed_camera_link"        # zed_camera_link
     slice_visualization_side_length: 10.0
 
     layer_visualization_min_tsdf_weight: 0.1
     layer_visualization_max_tsdf_distance: 0.1
-    layer_visualization_exclusion_height_m: 2.0
+    layer_visualization_exclusion_height_m: 2.0             # 2.0
     layer_visualization_exclusion_radius_m: 7.0
     layer_visualization_undo_gamma_correction: false
     max_back_projection_distance: 7.0

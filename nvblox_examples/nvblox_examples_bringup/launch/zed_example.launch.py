@@ -54,13 +54,13 @@ def generate_launch_description() -> LaunchDescription:
     
     args.add_arg(
         'nav2_params_file',
-        '/home/hyeongu/navigation_ws/src/aimy_main/2_navigation/aimy_navigation_bringup/config/nav2/nav2_params.yaml',
+        '/home/aimy/navigation_ws/src/aimy_main/2_navigation/aimy_navigation_bringup/config/nav2/nav2_nvblox_params.yaml',
         description='Full path to the ROS2 parameters file to use for Nav2.',
         cli=True)
     
     args.add_arg(
         'map',
-        '/home/hyeongu/navigation_ws/src/aimy_main/2_navigation/aimy_navigation_bringup/map/changbo_map.yaml',
+        '/home/aimy/navigation_ws/src/aimy_main/2_navigation/aimy_navigation_bringup/map/map_test_v3.yaml',
         description='Map file not required, starting with an empty map.',
         cli=True)
     
@@ -88,26 +88,26 @@ def generate_launch_description() -> LaunchDescription:
 
     
     # Nav2 bringup
-    # if args.map:
-    #     actions.append(
-    #         lu.include(
-    #             'nav2_bringup',
-    #             'launch/bringup_launch.py',
-    #             launch_arguments={
-    #                 'params_file': args.nav2_params_file,
-    #                 'map': args.map,
-    #                 # 'filtered_map': args.filtered_map,
-    #                 'use_sim_time': 'false'
-    #             }))
-    # else:
-    #     actions.append(
-    #         lu.include(
-    #             'nav2_bringup',
-    #             'launch/bringup_launch.py',
-    #             launch_arguments={
-    #                 'params_file': args.nav2_params_file,
-    #                 'use_sim_time': 'false'
-    #             }))
+    if args.map:
+        actions.append(
+            lu.include(
+                'nav2_bringup',
+                'launch/bringup_launch.py',
+                launch_arguments={
+                    'params_file': args.nav2_params_file,
+                    'map': args.map,
+                    # 'filtered_map': args.filtered_map,
+                    'use_sim_time': 'false'
+                }))
+    else:
+        actions.append(
+            lu.include(
+                'nav2_bringup',
+                'launch/bringup_launch.py',
+                launch_arguments={
+                    'params_file': args.nav2_params_file,
+                    'use_sim_time': 'false'
+                }))
     
     # Nvblox
     actions.append(
